@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+  <h1>Welcome <%= user.username %></h1>
+  <div>
+    <p>Date of Birth: <%= user.dateOfBirth.toDateString() %></p>
+    <p>Email: <%= user.email %></p>
+  </div>
+  <a href="/change-password">Change Password</a>
+</body>
+</html>
