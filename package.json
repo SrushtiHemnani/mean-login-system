@@ -1,0 +1,19 @@
+{
+  "name": "mean-login-system",
+  "version": "1.0.0",
+  "description": "Search packages from npmjs.org and use Sessions, Cookies in your express based  application. Store the information given by user and pass it onto the dashboard after login. Display the his details like username, date of birth, email id etc. beautifully in combination of HTML and CSS. The output should be neatly visible. You can use Exports feature, Routes and EJS templates for it as per your convenience. One route for displaying the profile, another for change of password and third is for login. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SrushtiHemnani/mean-login-system.git"
+  },
+  "author": "Srushti Hemnani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SrushtiHemnani/mean-login-system/issues"
+  },
+  "homepage": "https://github.com/SrushtiHemnani/mean-login-system#readme"
+}
