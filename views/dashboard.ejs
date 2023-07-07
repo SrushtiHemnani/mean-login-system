@@ -1,15 +1,409 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
+
 <head>
   <title>Dashboard</title>
   <link rel="stylesheet" type="text/css" href="/styles.css">
 </head>
+
 <body>
-  <h1>Welcome <%= user.username %></h1>
+  <h1>Welcome
+  </h1>
   <div>
-    <p>Date of Birth: <%= user.dateOfBirth.toDateString() %></p>
-    <p>Email: <%= user.email %></p>
+    <p>Date of Birth: <%= user.dateOfBirth %>
+    </p>
+    <p>Email: <%= user.email %>
+    </p>
   </div>
   <a href="/change-password">Change Password</a>
 </body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/5f4c1bb038.js" crossorigin="anonymous"></script>
+  <title>Neumorphisn Navbar</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", snas-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #ecf0f3;
+    }
+
+    .container,
+    .container .img-area,
+    .social-icons .a,
+    .buttons button {
+      background: #ecf0f3;
+      box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+    }
+
+    .container {
+      position: relative;
+      width: 350px;
+      padding: 30px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      top: 50px;
+      left: 50px;
+      transform: translate(-50px, -50px);
+    }
+
+
+    .container .icon.arrow {
+      left: 15px;
+    }
+
+    .container .icon.dots {
+      right: 15px;
+    }
+
+    .container .img-area {
+      height: 150px;
+      width: 150px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .img-are .inner-area {
+      height: calc(100% - 25px);
+      height: calc(100% - 25px);
+      border-radius: 50%;
+    }
+
+    .inner-area img {
+      height: 135px;
+    width: 135px;
+    border-radius: 50%;
+    object-fit: cover;
+    top: 3px;
+    position: relative;
+    }
+
+    .container .name {
+      font-size: 23px;
+      font-weight: 500;
+      color: #31344b;
+      margin: 10px 0 5px 0;
+    }
+
+    .container .about {
+      color: #44476a;
+      font-weight: 400;
+      font-size: 16px;
+    }
+
+    .container .social-icons {
+      margin: 15px 0 25px 0;
+    }
+
+    .social-icons a {
+      position: relative;
+      height: 40px;
+      width: 40px;
+      margin: 0 5px;
+      display: inline-flex;
+      text-decoration: none;
+      border-radius: 50%;
+    }
+
+    .social-icons a:hover::before,
+    .container .icon:hover::before,
+    .buttons button:hover:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      border-radius: 50%;
+      background: #ecf0f3;
+      box-shadow: inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
+    }
+
+    .buttons button:hover:before {
+      z-index: -1;
+      border-radius: 5px;
+    }
+
+    .social-icons a i {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      width: 100%;
+      height: 100%;
+      line-height: 40px;
+    }
+
+    .social-icons a.fb i {
+      color: #4267b2;
+    }
+
+    .social-icons a.twitter i {
+      color: #1da1f2;
+    }
+
+    .social-icons a.yt i {
+      color: #ff0000;
+    }
+
+    .social-icons a.insta i {
+      color: #e1306c;
+    }
+
+    .container .buttons {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .buttons button {
+      position: relative;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      outline: none;
+      padding: 8px 0;
+      color: #31344b;
+      font-size: 17px;
+      font-weight: 400;
+      cursor: pointer;
+      z-index: 4;
+    }
+
+    .buttons button:first-child {
+      margin-right: 10px;
+    }
+
+    .burttons button:last-child {
+      margin-left: 10px;
+    }
+
+    .container .social-share {
+      display: flex;
+      width: 100%;
+      margin-top: 30px;
+      padding: 0 5px;
+      justify-content: space-between;
+    }
+
+    .social-share .row {
+      color: #31344b;
+      font-size: 17px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .social-share .row::before {
+      position: absolute;
+      content: "";
+      height: 100%;
+      width: 2px;
+      background: #e0e6eb;
+      margin-left: -25px;
+    }
+
+    .row:first-child::before {
+      background: none;
+    }
+
+    .social-share .row i.icon-2 {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      color: #31344b;
+      transform: translateY(-50%);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .row:nth-child(1):hover i.fa-heart,
+    .row:nth-child(2):hover i.fa-comment {
+      pointer-events: auto;
+    }
+
+    .fa-heart {
+      color: #ff1493;
+    }
+
+    .fa-comment {
+      color: #1e90ff;
+    }
+
+    /* Add the following CSS to your existing CSS */
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ecf0f3;
+      padding: 10px;
+      box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    .navbar .logo img {
+      height: 40px;
+    }
+
+    .navbar .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .navbar .nav-links li {
+      margin-right: 15px;
+    }
+
+    .navbar .nav-links li a {
+      text-decoration: none;
+      color: #31344b;
+      font-weight: 500;
+    }
+
+    .navbar .nav-links li a:hover {
+      color: #ff1493;
+    }
+
+    /* User Icon Dropdown */
+    .user-dropdown {
+      position: relative;
+    }
+
+    .user-dropdown .user-icon img {
+      width: 40px;
+    height: 40px;
+    cursor: pointer;
+    object-fit: cover;
+    border-radius: 50px;
+    }
+
+    .user-dropdown .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #ecf0f3;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+      display: none;
+    }
+
+    .user-dropdown .dropdown-menu li {
+      margin-bottom: 5px;
+    }
+
+    .user-dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    .dropdown-menu li {
+    list-style: none;
+}
+a {
+  text-decoration: none;
+   color: #31344b;
+}
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="logo">
+      <img src="assets/images/logo.png" alt="Logo">
+    </div>
+    <ul class="nav-links">
+      <li><a href="#" class="buttons"> <button> Home</button> </a></li>
+      <li><a href="#" class="buttons"> <button>Products</button></a></li>
+      <li><a href="#" class="buttons"><button>Services</button></a></li>
+    </ul>
+    <div class="user-dropdown">
+      <div class="user-icon">
+        <img  src="uploads/<%= user.profileImage %>"alt="User Icon">
+      </div>
+      <ul class="dropdown-menu">
+        <li><a href="#" class="buttons"> <button> Profile </button></a></li>
+        <li><a href="#" class="buttons"> <button> Settings </button></a></li>
+        <li><a href="/logout" class="buttons"> <button> Logout </button></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="img-area">
+      <div class="inner-area ">
+        <img src="uploads/<%= user.profileImage %>" alt="person profile image">
+      </div>
+    </div>
+
+    <div class="name">
+      <%= user.name %>
+    </div>
+    <div class="about">
+      <%= user.title %>
+    </div>
+    <div class="social-icons">
+      <a href="#" class="fb"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="insta"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="yt"><i class="fab fa-youtube"></i></a>
+    </div>
+    <div class="buttons">
+      <button><a href="/edit-profile" > Edit Profile</a></button>
+      <!-- <button>Register</button> -->
+    </div>
+    <div class="social-share">
+      <div class="row">
+        <i class="fa-regular fa-envelope " style="color: #ff0000;"></i>
+        <span>
+          <%= user.email %>
+        </span>
+      </div>
+    </div>
+    <div class="social-share">
+      <div class="row">
+        <i class="fa-solid fa-cake-candles " style="color: #0022ff;"></i>
+        <span><%= user.dateOfBirth %></span>
+      </div>
+    </div>
+
+    <div class="social-share">
+      <div class="row">
+        <i class="fa-solid fa-pen " style="color: #ae00ff;"></i>
+        <span><%= user.bio %></span>
+      </div>
+    </div>
+
+
+
+  </div>
+
+</body>
+
 </html>
