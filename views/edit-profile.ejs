@@ -73,7 +73,7 @@
             align-items: center;
             position: absolute;
             top: 0;
-       
+
             padding: 25px;
             background-color: #ecf0f3;
             transition: 1.25s;
@@ -281,48 +281,98 @@
                 width: 500px;
             }
         }
-        .parent-container{
+
+        .parent-container {
             display: flex;
             justify-content: space-evenly;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <link href="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css
+    " rel="stylesheet">
+    <script src="
+    https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js
+    "></script>
+    <script>
+        function showSuccess(message) {
+            Swal.fire(
+                'Good job!',
+                message,
+                'success'
+            )
+
+        }
+
+        function showError(message) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: message,
+            })
+        }
+    </script>
+     <script type="text/javascript">
+        $(document).ready(function () {
+
+            if ( '<%= error %>') {
+                showError('<%= error %>') 
+            }
+
+            if ( '<%= success %>') {
+                showSuccess('<%= success %>') 
+            }
+
+          
+        })
+      </script>
 </head>
 
 <body>
     <div class="main">
         <div class="container" id="a-">
-            <form class="form" id="a-form"  method="POST" action="/edit-profile" enctype="multipart/form-data">
+            <form class="form" id="a-form" method="POST" action="/edit-profile" enctype="multipart/form-data">
                 <h2 class="form_title title">Update Profile</h2>
-              <div class="parent-container">
+              
+                            <div class="parent-container">
 
-                <div class="child-container">
-                    <input class="form__input" type="text" name="name" value="<%= user.name %>" placeholder="Name">
-                    <input class="form__input" type="email" name="email" value="<%= user.email %>"placeholder="Email">
-                    <input class="form__input" type="text" name="title" value="<%= user.title%>" placeholder="Title">
-                    <input class="form__input" type="date" name="dateOfBirth" value="<%=user.dateOfBirth %>" placeholder="DateOfBirth">
-                    <input class="form__input" type="text" name="bio"  value="<%= user.bio %>" placeholder="Bio">
-                    <input class="form__input" type="file" name="profileImage" accept="image/gif, image/jpeg,image/jpg, image/png">
-                </div>
-                <div class="child-container">
-                    <input class="form__input" type="password" name="oldPassword" placeholder="Old Password">
-                    <input class="form__input" type="password" name="newPassword" placeholder="New Password">
-                    <input class="form__input" type="password" name="passwordConfirmation" placeholder="Re-enter Password">
-                    <!-- <input class="form__input" type="email" name="email" placeholder="Email">
+                                <div class="child-container">
+                                    <input class="form__input" type="text" name="name" value="<%= user.name %>"
+                                        placeholder="Name">
+                                    <input class="form__input" type="email" name="email" value="<%= user.email %>"
+                                        placeholder="Email">
+                                    <input class="form__input" type="text" name="title" value="<%= user.title%>"
+                                        placeholder="Title">
+                                    <input class="form__input" type="date" name="dateOfBirth"
+                                        value="<%=user.dateOfBirth %>" placeholder="DateOfBirth">
+                                    <input class="form__input" type="text" name="bio" value="<%= user.bio %>"
+                                        placeholder="Bio">
+                                    <input class="form__input" type="file" name="profileImage"
+                                        accept="image/gif, image/jpeg,image/jpg, image/png">
+                                </div>
+                                <div class="child-container">
+                                    <input class="form__input" type="password" name="oldPassword"
+                                        placeholder="Old Password">
+                                    <input class="form__input" type="password" name="newPassword"
+                                        placeholder="New Password">
+                                    <input class="form__input" type="password" name="passwordConfirmation"
+                                        placeholder="Re-enter Password">
+                                    <!-- <input class="form__input" type="email" name="email" placeholder="Email">
                     <input class="form__input" type="text" name="title" placeholder="Title">
                     <input class="form__input" type="date" name="dateOfBirth" placeholder="DateOfBirth">
                     <input class="form__input" type="text" name="bio" placeholder="Bio">
                     <input class="form__input" type="password" name="password" placeholder="Password"> -->
-                    <!-- <input class="form__input" type="file" name="profileImage" accept="image/gif, image/jpeg,image/jpg, image/png"> -->
-                </div>
-            </div>
-          
-                <button class="form__button button" type="submit">Update</button>
+                                    <!-- <input class="form__input" type="file" name="profileImage" accept="image/gif, image/jpeg,image/jpg, image/png"> -->
+                                </div>
+                            </div>
+
+                            <button class="form__button button" type="submit">Update</button>
             </form>
         </div>
-     
-       
+
+
     </div>
-   
+  
 </body>
 
 </html>

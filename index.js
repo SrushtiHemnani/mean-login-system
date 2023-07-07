@@ -4,11 +4,9 @@ const cookieParser = require('cookie-parser');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const { MongoClient } = require('mongodb');
 const multer = require('multer');
-const path = require('path');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
+const bcrypt = require('bcrypt');
+const { ObjectId } = require('mongodb');
 const app = express();
 const port = 3000;
 
@@ -90,7 +88,7 @@ app.use(express.static('public'));
 app.use(
   session({
     secret: 'my-secret-key',
-    resave: false,
+    resave: '',
     saveUninitialized: true,
   })
 );
@@ -172,28 +170,32 @@ app.get('/dashboard', (req, res) => {
 
 app.get('/edit-profile', (req, res) => {
   const user = req.session.user;
-  if (!user) {
-    return res.redirect('/login');
-  }
-  res.render('edit-profile', { user });
+  if (!user) return res.redirect('/login');
+
+  res.render('edit-profile', {error:"", success:"",user });
 });
 
 app.post('/edit-profile',  upload.single('profileImage'), async (req, res) => {
-  const { name, email, password, title, dateOfBirth, bio, oldPassword, newPassword, passwordConfirmation } = req.body;
-  const profileImage = req.file ? req.file.filename : null;
+  const { name, email, title, dateOfBirth, bio, oldPassword, newPassword, passwordConfirmation } = req.body;
   const userId = new ObjectId(req.session.user._id);
-  const user = await req.app.locals.db.collection('users').findOne({ _id: userId });
+  const dbUser = await req.app.locals.db.collection('users').findOne({ _id: userId })
+  const user = req.session.user;
+  const profileImage = req.file ? req.file.filename : dbUser.profileImage;
+  let hashedPassword = dbUser.password;
 
-  if (newPassword !== passwordConfirmation) return res.render('edit-profile', { error: 'New password and confirm password do not match' });
-  if (!user) return res.render('edit-profile', { error: 'DB User Not found' });
+  if(newPassword != '' || oldPassword != '' || passwordConfirmation != ''){
+    if (newPassword !== passwordConfirmation) return res.render('edit-profile', { error: 'New password and confirm password do not match', success:'', user });
+    if (!dbUser) return res.render('edit-profile', { error: 'DB User Not found', success: '', user });
+  
+    // Compare passwords
+    const isPasswordValid = await bcrypt.compare(oldPassword, dbUser.password);
+  
+    if (!isPasswordValid) return res.render('edit-profile', { error: 'Invalid password',success:'',  user });
+  
+    // Hash and update the new password
+     hashedPassword = await bcrypt.hash(newPassword, 10);
+  }
 
-  // Compare passwords
-  const isPasswordValid = await bcrypt.compare(oldPassword, dbUser.password);
-
-  if (!isPasswordValid) return res.render('edit-profile', { error: 'Invalid password' });
-
-  // Hash and update the new password
-  const hashedPassword = await bcrypt.hash(newPassword, 10);
 
   let newData = {
     name,
@@ -201,7 +203,7 @@ app.post('/edit-profile',  upload.single('profileImage'), async (req, res) => {
     title,
     dateOfBirth,
     bio,
-    password: hashedPassword,
+    password: hashedPassword ,
     profileImage
   }
 
@@ -213,11 +215,12 @@ app.post('/edit-profile',  upload.single('profileImage'), async (req, res) => {
       const data = await req.app.locals.db.collection('users').findOne({ _id: userId });
       // Update session with new user information
       req.session.user = {...data}
-
-      // Redirect to the updated profile page
-      return res.render('/edit-profile', {success: "Profile Updated Successfully"});
+      let user = data
+      if (!user) return res.redirect('/login');
+    
+      res.render('edit-profile', {error:"", success :"Profile Updated Succesfully", user });
     }
-    return res.render('/edit-profile', {error: "Somthing went wrong!"});
+    // return res.render('edit-profile', {error: "Somthing went wrong!"});
 });
 
 // Logout route
