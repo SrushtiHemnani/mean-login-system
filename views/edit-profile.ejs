@@ -7,40 +7,35 @@
     <link rel="stylesheet" type="text/css" href="main.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        *,
-        *::after,
-        *::before {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-        }
+          @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
-        /* Generic */
-        body {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: "Montserrat", sans-serif;
-            font-size: 12px;
-            background-color: #ecf0f3;
-            color: #a0a5a8;
-        }
+          * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", snas-serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #ecf0f3;
+    }
 
         /**/
         .main {
-            position: relative;
+            position: fixed;
             width: 1000px;
             min-width: 1000px;
             min-height: 600px;
-            height: 600px;
             padding: 25px;
             background-color: #ecf0f3;
             box-shadow: 10px 10px 10px #d1d9e6, -10px -10px 10px #f9f9f9;
             border-radius: 12px;
             overflow: hidden;
+            top: 80px;
         }
 
         @media (max-width: 1200px) {
@@ -72,7 +67,7 @@
             justify-content: center;
             align-items: center;
             position: absolute;
-            top: 0;
+            top: 0px;
 
             padding: 25px;
             background-color: #ecf0f3;
@@ -286,6 +281,131 @@
             display: flex;
             justify-content: space-evenly;
         }
+        .container,
+    .container .img-area,
+    .social-icons .a,
+    .buttons button {
+      background: #ecf0f3;
+      box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+    }
+          /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ecf0f3;
+      padding: 10px;
+      box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .navbar .logo img {
+      height: 40px;
+    }
+
+    .navbar .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .navbar .nav-links li {
+      margin-right: 15px;
+    }
+
+    .navbar .nav-links li a {
+      text-decoration: none;
+      color: #31344b;
+      font-weight: 500;
+    }
+
+    .navbar .nav-links li a:hover {
+      color: #ff1493;
+    }
+
+    /* User Icon Dropdown */
+    .user-dropdown {
+      position: relative;
+    }
+
+    .user-dropdown .user-icon img {
+      width: 40px;
+    height: 40px;
+    cursor: pointer;
+    object-fit: cover;
+    border-radius: 50px;
+    }
+
+    .user-dropdown .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #ecf0f3;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: -3px -3px 7px #ffffff, 3px 3px 5px #ceced1;
+      display: none;
+    }
+
+    .user-dropdown .dropdown-menu li {
+      margin-bottom: 5px;
+    }
+
+    .user-dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    .dropdown-menu li {
+    list-style: none;
+}
+a {
+  text-decoration: none;
+   color: #31344b;
+}
+
+.buttons button {
+      position: relative;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      outline: none;
+      padding: 8px 0;
+      color: #31344b;
+      font-size: 17px;
+      font-weight: 400;
+      cursor: pointer;
+      z-index: 4;
+    }
+
+    .buttons button:first-child {
+      margin-right: 10px;
+    }
+
+    .burttons button:last-child {
+      margin-left: 10px;
+    }
+
+
+    .social-icons a:hover::before,
+    .container .icon:hover::before,
+    .buttons button:hover:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      border-radius: 50%;
+      background: #ecf0f3;
+      box-shadow: inset -3px -3px 7px #ffffff, inset 3px 3px 5px #ceced1;
+    }
+
+    .buttons button:hover:before {
+      z-index: -1;
+      border-radius: 5px;
+    }
+
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <link href="
@@ -312,67 +432,84 @@
             })
         }
     </script>
-     <script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function () {
 
-            if ( '<%= error %>') {
-                showError('<%= error %>') 
+            if ('<%= error %>') {
+                showError('<%= error %>')
             }
 
-            if ( '<%= success %>') {
-                showSuccess('<%= success %>') 
+            if ('<%= success %>') {
+                showSuccess('<%= success %>')
             }
 
-          
+
         })
-      </script>
+    </script>
 </head>
 
 <body>
+    <div class="navbar">
+        <div class="logo">
+          <img src="assets/images/logo.png" alt="Logo">
+        </div>
+        <ul class="nav-links">
+          <li><a href="/dashboard" class="buttons"> <button> Dashboard</button> </a></li>
+          <li><a href="#" class="buttons"> <button>Contact us</button></a></li>
+          <li><a href="#" class="buttons"><button>Services</button></a></li>
+        </ul>
+        <div class="user-dropdown">
+          <div class="user-icon">
+            <img  src="uploads/<%= user.profileImage %>"alt="User Icon">
+          </div>
+          <ul class="dropdown-menu">
+            <li><a href="#" class="buttons"> <button> Profile </button></a></li>
+            <li><a href="#" class="buttons"> <button> Settings </button></a></li>
+            <li><a href="/logout" class="buttons"> <button> Logout </button></a></li>
+          </ul>
+        </div>
+      </div>
+
     <div class="main">
         <div class="container" id="a-">
             <form class="form" id="a-form" method="POST" action="/edit-profile" enctype="multipart/form-data">
                 <h2 class="form_title title">Update Profile</h2>
-              
-                            <div class="parent-container">
 
-                                <div class="child-container">
-                                    <input class="form__input" type="text" name="name" value="<%= user.name %>"
-                                        placeholder="Name">
-                                    <input class="form__input" type="email" name="email" value="<%= user.email %>"
-                                        placeholder="Email">
-                                    <input class="form__input" type="text" name="title" value="<%= user.title%>"
-                                        placeholder="Title">
-                                    <input class="form__input" type="date" name="dateOfBirth"
-                                        value="<%=user.dateOfBirth %>" placeholder="DateOfBirth">
-                                    <input class="form__input" type="text" name="bio" value="<%= user.bio %>"
-                                        placeholder="Bio">
-                                    <input class="form__input" type="file" name="profileImage"
-                                        accept="image/gif, image/jpeg,image/jpg, image/png">
-                                </div>
-                                <div class="child-container">
-                                    <input class="form__input" type="password" name="oldPassword"
-                                        placeholder="Old Password">
-                                    <input class="form__input" type="password" name="newPassword"
-                                        placeholder="New Password">
-                                    <input class="form__input" type="password" name="passwordConfirmation"
-                                        placeholder="Re-enter Password">
-                                    <!-- <input class="form__input" type="email" name="email" placeholder="Email">
+                <div class="parent-container">
+
+                    <div class="child-container">
+                        <input class="form__input" type="text" name="name" value="<%= user.name %>" placeholder="Name">
+                        <input class="form__input" type="email" name="email" value="<%= user.email %>"
+                            placeholder="Email">
+                        <input class="form__input" type="text" name="title" value="<%= user.title%>"
+                            placeholder="Title">
+                        <input class="form__input" type="date" name="dateOfBirth" value="<%=user.dateOfBirth %>"
+                            placeholder="DateOfBirth">
+                        <input class="form__input" type="text" name="bio" value="<%= user.bio %>" placeholder="Bio">
+                        <input class="form__input" type="file" name="profileImage"
+                            accept="image/gif, image/jpeg,image/jpg, image/png">
+                    </div>
+                    <div class="child-container">
+                        <input class="form__input" type="password" name="oldPassword" placeholder="Old Password">
+                        <input class="form__input" type="password" name="newPassword" placeholder="New Password">
+                        <input class="form__input" type="password" name="passwordConfirmation"
+                            placeholder="Re-enter Password">
+                        <!-- <input class="form__input" type="email" name="email" placeholder="Email">
                     <input class="form__input" type="text" name="title" placeholder="Title">
                     <input class="form__input" type="date" name="dateOfBirth" placeholder="DateOfBirth">
                     <input class="form__input" type="text" name="bio" placeholder="Bio">
                     <input class="form__input" type="password" name="password" placeholder="Password"> -->
-                                    <!-- <input class="form__input" type="file" name="profileImage" accept="image/gif, image/jpeg,image/jpg, image/png"> -->
-                                </div>
-                            </div>
+                        <!-- <input class="form__input" type="file" name="profileImage" accept="image/gif, image/jpeg,image/jpg, image/png"> -->
+                    </div>
+                </div>
 
-                            <button class="form__button button" type="submit">Update</button>
+                <button class="form__button button" type="submit">Update</button>
             </form>
         </div>
 
 
     </div>
-  
+
 </body>
 
 </html>

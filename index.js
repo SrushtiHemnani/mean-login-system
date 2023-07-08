@@ -100,7 +100,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.render('login', {error: "", success:""});
 });
 
 app.post('/login', async (req, res) => {
@@ -110,20 +110,20 @@ app.post('/login', async (req, res) => {
   const user = await req.app.locals.db.collection("users").findOne({ email })
 
   if (!user) {
-    return res.render('login', { error: 'Invalid email or password' });
+    return res.render('login', { error: 'Invalid email or password', success : "" });
   }
 
   // Compare passwords
   const isPasswordValid = await bcrypt.compare(password, user.password);
 
   if (!isPasswordValid) {
-    return res.render('login', { error: 'Invalid email or password' });
+    return res.render('login', { error: 'Invalid email or password', success : "" });
   }
 
   // Store user information in the session
   req.session.user = { ...user };
 
-  res.redirect('/dashboard');
+  res.render('dashboard', { error: "", success : "Welcome to the Dashboard", user});
 });
 app.get('/register', (req, res) => {
   res.render('register');
@@ -165,7 +165,7 @@ app.get('/dashboard', (req, res) => {
   if (!user) {
     return res.redirect('/login');
   }
-  res.render('dashboard', { user });
+  res.render('dashboard', {error: "", success :"", user });
 });
 
 app.get('/edit-profile', (req, res) => {
@@ -217,8 +217,8 @@ app.post('/edit-profile',  upload.single('profileImage'), async (req, res) => {
       req.session.user = {...data}
       let user = data
       if (!user) return res.redirect('/login');
-    
-      res.render('edit-profile', {error:"", success :"Profile Updated Succesfully", user });
+      
+      res.render('dashboard', {error:"", success :"Profile Updated Succesfully", user });
     }
     // return res.render('edit-profile', {error: "Somthing went wrong!"});
 });
