@@ -27,7 +27,7 @@ app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 
 // Connect to MongoDB
-const uri = 'mongodb://0.0.0.0:27017/login_app';
+const uri = 'mongodb+srv://srushtihemnani:Ma0K3talOfvKONFb@srush.k5kasxv.mongodb.net/node_login_app';
 
 // Connect to MongoDB
 
@@ -87,7 +87,7 @@ app.use(express.static('public'));
 
 app.use(
   session({
-    secret: 'my-secret-key',
+    secret: 'login-app-srush',
     resave: '',
     saveUninitialized: true,
   })
