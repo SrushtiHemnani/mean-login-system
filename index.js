@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
 const { ObjectId } = require('mongodb');
 const app = express();
 const port = 3000;
+const uri = 'mongodb+srv://srushtihemnani:Ma0K3talOfvKONFb@srush.k5kasxv.mongodb.net/node_login_app';
 
 // Set up middlewares
 app.use(express.urlencoded({ extended: true }));
@@ -16,7 +17,14 @@ app.use(cookieParser());
 app.use(session({
   secret: 'your-secret-key',
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  store: new MongoDBStore({
+    uri: uri, // Replace with your MongoDB connection URI
+    collection: 'sessions',
+    // Optional: Set additional options as needed
+    // For example, you can set 'expires' to control session expiration
+    expires: 1000 * 60 * 60 * 24, // Session expires in 24 hours
+  }),
 }));
 
 // Set up EJS as the view engine
@@ -27,7 +35,6 @@ app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 
 // Connect to MongoDB
-const uri = 'mongodb+srv://srushtihemnani:Ma0K3talOfvKONFb@srush.k5kasxv.mongodb.net/node_login_app';
 
 // Connect to MongoDB
 
