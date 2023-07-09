@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const { MongoClient } = require('mongodb');
 const multer = require('multer');
+const MongoStore = require('connect-mongo')
 
 const bcrypt = require('bcrypt');
 const { ObjectId } = require('mongodb');
@@ -15,18 +16,13 @@ const uri = 'mongodb+srv://srushtihemnani:Ma0K3talOfvKONFb@srush.k5kasxv.mongodb
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({
-  secret: 'your-secret-key',
-  resave: true,
+  secret: 'test',
+  resave: false,
   saveUninitialized: true,
-  store: new MongoDBStore({
-    uri: uri, // Replace with your MongoDB connection URI
-    collection: 'sessions',
-    // Optional: Set additional options as needed
-    // For example, you can set 'expires' to control session expiration
-    expires: 1000 * 60 * 60 * 24, // Session expires in 24 hours
-  }),
-}));
-
+  store: MongoStore.create({
+    mongoUrl: uri,
+  })
+}))
 // Set up EJS as the view engine
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
